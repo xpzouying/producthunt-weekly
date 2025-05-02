@@ -35,15 +35,23 @@ const content = {
 const currentUrl = `${SITE.homePage}${currentPage}`;
 
 // The next article
-const posts = Object.values(import.meta.glob('../pages/posts/*.md', { eager: true }));
+const posts = Object.values(
+  import.meta.glob("../pages/posts/*.md", { eager: true }),
+);
 const allPosts = sortPosts(posts);
 const postIndex = getIndex(currentPage);
-let nextUrl =
-  postIndex > 2 ? allPosts[allPosts.length - postIndex + 1].url : "";
-let prevUrl =
-  postIndex < allPosts.length
-    ? allPosts[allPosts.length - postIndex - 1].url
-    : "";
+let nextUrl = "";
+let prevUrl = "";
+
+if (postIndex > 2) {
+  const nextPost = allPosts[allPosts.length - postIndex + 1];
+  nextUrl = nextPost?.url || "";
+}
+
+if (postIndex < allPosts.length) {
+  const prevPost = allPosts[allPosts.length - postIndex - 1];
+  prevUrl = prevPost?.url || "";
+}
 ---
 
 <html lang="ch">
