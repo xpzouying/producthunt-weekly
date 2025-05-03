@@ -15,9 +15,9 @@ async function main() {
   const mdFiles = files
     .filter(file => file.endsWith('.md'))
     .sort((a, b) => {
-      const numA = parseInt(a.match(/(\d+)/)[0]);
-      const numB = parseInt(b.match(/(\d+)/)[0]);
-      return numB - numA;
+      const dateA = a.split('.md')[0];
+      const dateB = b.split('.md')[0];
+      return dateB.localeCompare(dateA);
     });
 
   const posts = [];
@@ -27,13 +27,17 @@ async function main() {
   for (let i = 0; i < mdFiles.length; i++) {
     const name = mdFiles[i];
     const filePath = encodeURIComponent(name);
-    const oldTitle = name.split('.md')[0];
-    const num = parseInt(oldTitle.split('-')[0]);
-    const shortTitle = oldTitle.split('-')[1];
-    const url = `https://product-daily.haha.ai/posts/${oldTitle}`;
-    const title = `第 ${num} 期 - ${shortTitle}`;
+    const dateStr = name.split('.md')[0];
 
-    posts.push({ num, title: shortTitle, url });
+    const year = dateStr.substring(0, 4);
+    const month = dateStr.substring(4, 6);
+    const day = dateStr.substring(6, 8);
+
+    const url = `https://product-daily.haha.ai/posts/${dateStr}`;
+
+    const title = `第${year}年${month}月${day}日热榜`;
+
+    posts.push({ date: dateStr, title: title, url });
     readmeContent2 += `* [${title}](${url})\n`;
 
     if (i < 5) {
