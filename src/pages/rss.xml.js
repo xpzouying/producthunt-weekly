@@ -4,9 +4,10 @@ export async function GET() {
   let posts = Object.values(allPosts);
 
   posts = posts.sort((a, b) => {
-    const getPostNumber = (url) =>
-      parseInt(url.split("/posts/")[1].split("-")[0]);
-    return getPostNumber(b.url) - getPostNumber(a.url);
+    // 从URL中提取日期（YYYYMMDD格式）
+    const getDateStr = (url) => url.split("/posts/")[1];
+    // 直接使用字符串比较，降序排列
+    return getDateStr(b.url).localeCompare(getDateStr(a.url));
   });
 
   // Only 12 are kept
@@ -25,10 +26,17 @@ export async function GET() {
     customData: `<image><url>https://gw.alicdn.com/imgextra/i2/O1CN01m9YYjS1QBeW5DOm3I_!!6000000001938-2-tps-400-400.png</url></image>`,
     items: await Promise.all(
       posts.map(async (item) => {
-        const [issueNumber, issueTitle] = item.url
-          .split("/posts/")[1]
-          .split("-");
-        const title = `第${issueNumber}期 - ${issueTitle}`;
+        // 从URL中提取日期（YYYYMMDD格式）
+        const dateStr = item.url.split("/posts/")[1];
+
+        // 格式化日期为标题
+        const year = dateStr.substring(0, 4);
+        const month = dateStr.substring(4, 6);
+        const day = dateStr.substring(6, 8);
+
+        // 构建标题: 第YYYY年MM月DD日热榜
+        const title = `第${year}年${month}月${day}日热榜`;
+
         return {
           link: item.url,
           title,
