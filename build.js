@@ -35,7 +35,7 @@ async function main() {
 
     const url = `https://product-daily.haha.ai/posts/${dateStr}`;
 
-    const title = `第${year}年${month}月${day}日热榜`;
+    const title = `${year}年${month}月${day}日热榜`;
 
     posts.push({ date: dateStr, title: title, url });
     readmeContent2 += `* [${title}](${url})\n`;

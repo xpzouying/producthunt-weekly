@@ -35,7 +35,7 @@ export async function GET() {
         const day = dateStr.substring(6, 8);
 
         // 构建标题: 第YYYY年MM月DD日热榜
-        const title = `第${year}年${month}月${day}日热榜`;
+        const title = `${year}年${month}月${day}日热榜`;
 
         return {
           link: item.url,
