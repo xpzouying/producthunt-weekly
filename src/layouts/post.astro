@@ -39,7 +39,7 @@ const posts = Object.values(
   import.meta.glob("../pages/posts/*.md", { eager: true }),
 );
 const allPosts = sortPosts(posts);
-const postIndex = getIndex(currentPage);
+const postIndex = parseInt(getIndex(currentPage));
 let nextUrl = "";
 let prevUrl = "";
 
@@ -216,14 +216,16 @@ if (postIndex < allPosts.length) {
             <Search />
           </h1>
           <slot />
-          <div class="flex align-middle justify-center mt-4">
+
+          <!-- <div class="flex align-middle justify-center mt-4">
             <a
               class="inline-block items-center rounded px-5 py-3 text-sm font-medium pay-button"
               href="https://miaoyan.app/cats.html?name=潮流周刊"
               target="_blank"
               rel="noreferrer">给汤圆可乐喂罐头❤️</a
             >
-          </div>
+          </div> -->
+
           <hr />
           <div
             class="flex justify-between md:flex-row flex-col mt-2 post-footer"
