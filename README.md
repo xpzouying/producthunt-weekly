@@ -2,6 +2,7 @@
 
 > Product Hunt 每日精华，由邹颖整理。欢迎订阅和交流。
 
+* [2026年02月01日热榜](https://product-daily.haha.ai/posts/20260201)
 * [2026年01月31日热榜](https://product-daily.haha.ai/posts/20260131)
 * [2026年01月30日热榜](https://product-daily.haha.ai/posts/20260130)
 * [2026年01月29日热榜](https://product-daily.haha.ai/posts/20260129)
